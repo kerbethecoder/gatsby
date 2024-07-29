@@ -42,7 +42,7 @@ const samplePageLinks = [
       "A simple example of linking to another page within a Gatsby site",
   },
   { text: "TypeScript", url: "using-typescript" },
-  { text: "Server Side Rendering", url: "using-ssr" },
+  // { text: "Server Side Rendering", url: "using-ssr" },
   { text: "Deferred Static Generation", url: "using-dsg" },
 ]
 
@@ -115,6 +115,21 @@ const IndexPage = () => (
         {i !== moreLinks.length - 1 && <> · </>}
       </React.Fragment>
     ))}
+
+    <div className="flex m-0 mt-10 gap-2">
+      <p className="font-bold text-red-500">
+        This text is red to display working Tailwind CSS
+      </p>
+      <span>-</span>
+      <a
+        href="https://github.com/kerbethecoder"
+        target="_blank"
+        rel="noreferrer noopener"
+        className="text-gray-400"
+      >
+        @kerbethecoder
+      </a>
+    </div>
   </Layout>
 )
 
