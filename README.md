@@ -1,6 +1,6 @@
-<!-- img snap -->
+![image](./src/images/snap.png)
 
-<!-- badges -->
+![Static Badge](https://img.shields.io/badge/gatsby-v5%2e13%2e5-663399) ![Static Badge](https://img.shields.io/badge/tailwindcss-v3%2e4%2e7-38bdf8)
 
 "[Gatsby](https://www.gatsbyjs.com/) is a React-based open source framework for creating websites. Whether your site has 100 pages or 100,000 pages — if you care deeply about performance, scalability, and built-in security — you'll love building with us. Start pulling data from your favorite headless CMS easily!"
 
@@ -142,6 +142,73 @@ A quick look at the top-level files and directories you'll see in a typical Gats
 10. **`README.md`**: A text file containing useful reference information about your project.
 
 ## 🛫 How to deploy to GitHub Pages
+
+Deploying to github pages is totally up to you, be it through **[GitHub Actions](https://docs.github.com/en/actions/deployment/about-deployments/deploying-with-github-actions)**, or via **[gh-pages](https://www.npmjs.com/package/gh-pages)**, or manually.
+
+> [!NOTE]
+>
+> Remember that [GitHub Pages](https://pages.github.com/) have limitations, so for this project, I removed the page with server side rendering.
+
+### ❗ via package ❗
+
+**1. Install `gh-pages` package.**
+
+```bash
+# terminal
+npm install gh-pages --save-dev
+```
+
+**2. Configure paths.** <small>[reference here](https://www.gatsbyjs.com/docs/how-to/previews-deploys-hosting/path-prefix/)</small>
+
+```js
+// gatsby.config.js
+module.exports = {
+  pathPrefix: `/blog`,
+}
+```
+
+**3. Modify your _scripts_ in `package.json`.**
+
+```json
+{
+  "scripts": {
+    "build": "gatsby build --prefix-paths",
+    "deploy": "npm run build && gh-pages -d public"
+  }
+}
+```
+
+**4. Create and configure a new branch for `gh-pages`.**
+
+> [!IMPORTANT]
+>
+> Make sure that you have committed your changes before doing this. All untracked and staged files may be deleted.
+>
+> I like to do this manually. If there is some automated way, feel free to let me know by any means.
+
+```bash
+git checkout --orphan gh-pages
+git reset --hard
+git commit --allow-empty -m 'commit_message'
+git push origin gh-pages
+```
+
+**5. Publish the production build.**
+
+```bash
+npm run deploy
+```
+
+### ❗ via manually configuring github pages settings ❗
+
+**1. Create your project.**
+Start coding your project, either use a framework like React, Vue, or not.
+
+**2. Publish production build to GitHub.**
+Push your _production build_ to your github repo. After that, check if your `index.html` file is uploaded, since it is one of the core files needed for your website to work.
+
+**3. Configure your GitHub Pages on repo Settings.**
+Navigate to `Settings > Pages > Build and deployment`. Make sure the **Source** says 'Deploy from a branch', and then configure the **Branch** settings and change it to your branch with the files.
 
 ## 💡 Learn More
 
